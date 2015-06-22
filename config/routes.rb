@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :answers
+
   resources :questions
 
   devise_for :turks, controllers: {
