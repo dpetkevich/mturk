@@ -1,13 +1,34 @@
 Rails.application.routes.draw do
-  devise_for :turks
+  
+  resources :questions
+
+  devise_for :turks, controllers: {
+   sessions: 'turks/sessions',
+   registrations: 'turks/registrations',
+   confirmations: 'turks/confirmations',
+   passwords: 'turks/passwords',
+   invitations: 'turks/invitations'
+  }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
 
+
+      
+
   devise_scope :turk do
-      root 'devise/sessions#new'
+    authenticated :turk do
+      root 'questions#index', as: :authenticated_root
+    end
+
+    unauthenticated do
+      root 'turks/registrations#new', as: :unauthenticated_root
+    end
   end
+
+
+  
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
