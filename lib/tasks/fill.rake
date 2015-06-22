@@ -6,7 +6,7 @@ namespace :csvimport do
     require 'csv'
 
 
-    CSV.foreach("captcha.csv", :headers => true) do |row|
+    CSV.foreach("/app/lib/tasks/captcha.csv", :headers => true) do |row|
   		@question= Question.new(row.to_hash)
   		@question.save
 	end
