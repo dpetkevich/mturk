@@ -17,7 +17,7 @@ class Turks::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     
-    @turk = Turk.where(email: params[:turk][:email])[0]
+    @turk = Turk.where(bitcoin_address: params[:turk][:bitcoin_address])[0]
 
     if @turk.nil?
 
