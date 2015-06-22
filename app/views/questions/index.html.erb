@@ -8,10 +8,11 @@
 
 <div class='row text-center'>
   <div class='col-lg-12'>
-    <%= image_tag('13532.jpg') %>
+    <%= image_tag(@image_address) %>
   </div>  
 </div>
 
+<%= form_for @answer, url: answers_path(@question) do |f| %>
 <div class='row text-center' style='margin-top:20px'>
   <div class='col-lg-12'>
     <div class='form-group'>
