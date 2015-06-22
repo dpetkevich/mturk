@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150622053146) do
+ActiveRecord::Schema.define(version: 20150622052233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20150622053146) do
   end
 
   create_table "turks", force: :cascade do |t|
-    t.string   "bitcoin_address",        default: "",  null: false
+    t.string   "email",                  default: "",  null: false
     t.string   "encrypted_password",     default: "",  null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20150622053146) do
     t.decimal  "balance",                default: 0.0
   end
 
-  add_index "turks", ["bitcoin_address"], name: "index_turks_on_bitcoin_address", unique: true, using: :btree
+  add_index "turks", ["email"], name: "index_turks_on_email", unique: true, using: :btree
   add_index "turks", ["reset_password_token"], name: "index_turks_on_reset_password_token", unique: true, using: :btree
 
 end
