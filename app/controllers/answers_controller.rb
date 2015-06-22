@@ -25,16 +25,20 @@ class AnswersController < ApplicationController
   # POST /answers.json
   def create
     @answer = Answer.new(answer_params)
+    @turk= current_turk
+    @answer.turk_id= current_turk.id
 
-    respond_to do |format|
-      if @answer.save
-        format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
-        format.json { render :show, status: :created, location: @answer }
+
+      if @answer.valid?
+        @answer.save
+        @turk.balance = @turk.balance + 1
+        @turk.save
+
+        redirect_to questions_path
       else
-        format.html { render :new }
-        format.json { render json: @answer.errors, status: :unprocessable_entity }
+        render 'questions/index'
       end
-    end
+    
   end
 
   # PATCH/PUT /answers/1
@@ -69,6 +73,6 @@ class AnswersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def answer_params
-      params[:answer]
+      params[:answer].permit(:content, :question_id)
     end
 end

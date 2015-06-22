@@ -7,6 +7,9 @@ class QuestionsController < ApplicationController
     @question= Question.where("answers_count <= 5").sample
     @photo_id=@question.photo_id
     @image_address="https://s3-us-west-2.amazonaws.com/nous1/#@photo_id.jpg"
+
+    @answer = Answer.new
+  
   end
 
   def answer
